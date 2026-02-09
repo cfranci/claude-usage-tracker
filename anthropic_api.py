@@ -307,7 +307,7 @@ def get_oauth_usage() -> Optional[dict]:
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {token}",
                 "anthropic-beta": "oauth-2025-04-20",
-                "User-Agent": "claude-code/2.0.31",
+                "User-Agent": "claude-code/2.1.34",
             },
             timeout=10
         )
@@ -322,8 +322,11 @@ def get_oauth_usage() -> Optional[dict]:
         return None
 
 
-def format_reset_time(iso_time: str) -> str:
+def format_reset_time(iso_time: str | None) -> str:
     """Format ISO timestamp to friendly reset time."""
+    if not iso_time:
+        return "--"
+
     from datetime import datetime
     import re
 

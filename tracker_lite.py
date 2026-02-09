@@ -34,7 +34,7 @@ def get_usage():
             headers={
                 "Authorization": f"Bearer {token}",
                 "anthropic-beta": "oauth-2025-04-20",
-                "User-Agent": "claude-code/2.0.31",
+                "User-Agent": "claude-code/2.1.34",
             }
         )
         with urllib.request.urlopen(req, timeout=10) as resp:
@@ -44,6 +44,8 @@ def get_usage():
 
 def fmt_reset(iso):
     """Format reset time."""
+    if not iso:
+        return "--"
     try:
         dt = datetime.fromisoformat(iso.replace("+00:00", "+0000").split(".")[0] + "+0000")
         diff = dt - datetime.now(dt.tzinfo)
